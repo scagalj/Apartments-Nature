@@ -1,12 +1,11 @@
 @extends('site.layout')
-@use('App\Support\Seo')
 
 @php
     $site = config('site');
     $d = $site['distances'];
     $home = route('welcome.locale', ['locale' => $lang]);
     $maxGuests = max(1, $apartments->max(fn($apartment) => $apartment->getNumberOfGuests()) ?: 2);
-    $startingPrice = Seo::startingPrice();
+    $startingPrice = \App\Support\Seo::startingPrice();
 
     $faqParams = [
         'beach' => $d['beach'], 'old_town' => $d['old_town'], 'airport' => $d['airport'], 'split' => $d['split'],
@@ -38,7 +37,7 @@
     ];
 
     $schema = [
-        Seo::lodgingBusiness($lang),
+        \App\Support\Seo::lodgingBusiness($lang),
         [
             '@type' => 'ItemList',
             'name' => __('site.apartments_title'),
@@ -82,7 +81,7 @@
             <a class="hero-rating" href="#reviews">
                 <span class="hero-rating-score">{{ number_format($reviewSummary['average'], 1) }}</span>
                 <span class="hero-rating-text">
-                    <strong>{{ __('site.score_word_' . Seo::scoreWord($reviewSummary['average'])) }}</strong>
+                    <strong>{{ __('site.score_word_' . \App\Support\Seo::scoreWord($reviewSummary['average'])) }}</strong>
                     {{ trans_choice('site.reviews_count', $reviewSummary['count'], ['count' => $reviewSummary['count']]) }}
                 </span>
                 <span class="stars" aria-hidden="true">@for($i = 0; $i < 5; $i++)@include('site.partials.icon', ['name' => 'star'])@endfor</span>
@@ -180,8 +179,8 @@
             </ul>
             <address class="nap-card">
                 <strong>{{ $site['name'] }}</strong>
-                <span>{{ Seo::fullAddress() }}</span>
-                <span><a href="tel:{{ $site['phone'] }}">{{ Seo::formatPhone($site['phone']) }}</a> · <a href="mailto:{{ $site['email'] }}">{{ $site['email'] }}</a></span>
+                <span>{{ \App\Support\Seo::fullAddress() }}</span>
+                <span><a href="tel:{{ $site['phone'] }}">{{ \App\Support\Seo::formatPhone($site['phone']) }}</a> · <a href="mailto:{{ $site['email'] }}">{{ $site['email'] }}</a></span>
             </address>
         </div>
     </div>

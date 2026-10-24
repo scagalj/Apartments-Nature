@@ -79,13 +79,11 @@ Route::get('/selfcheckin', function () {
     return redirect()->route('selfcheckin.locale', ['locale' => LangController::getLanguage()], 301);
 })->name('selfcheckin');
 
-Route::where(['locale' => $locales])->group(function () {
-    Route::get('/{locale}', [SiteController::class, 'home'])->name('welcome.locale');
-    Route::get('/{locale}/apartment/{apartment}', [ApartmentController::class, 'show'])->whereNumber('apartment')->name('apartment.locale');
-    Route::get('/{locale}/contactus', [SiteController::class, 'contact'])->name('contactus');
-    Route::get('/{locale}/privacypolicy', [SiteController::class, 'privacyPolicy'])->name('privacypolicy');
-    Route::get('/{locale}/selfcheckin', [SiteController::class, 'selfCheckIn'])->name('selfcheckin.locale');
-});
+Route::get('/{locale}', [SiteController::class, 'home'])->where('locale', $locales)->name('welcome.locale');
+Route::get('/{locale}/apartment/{apartment}', [ApartmentController::class, 'show'])->where(['locale' => $locales, 'apartment' => '[0-9]+'])->name('apartment.locale');
+Route::get('/{locale}/contactus', [SiteController::class, 'contact'])->where('locale', $locales)->name('contactus');
+Route::get('/{locale}/privacypolicy', [SiteController::class, 'privacyPolicy'])->where('locale', $locales)->name('privacypolicy');
+Route::get('/{locale}/selfcheckin', [SiteController::class, 'selfCheckIn'])->where('locale', $locales)->name('selfcheckin.locale');
 
 
 //---MAIL CONTACT----

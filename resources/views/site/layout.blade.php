@@ -1,9 +1,8 @@
-@use('App\Support\Seo')
 @php
     $lang = app()->getLocale();
     $noindex = trim($__env->yieldContent('noindex')) !== '';
-    $alternates = $noindex ? [] : Seo::alternates();
-    $canonical = Seo::canonical();
+    $alternates = $noindex ? [] : \App\Support\Seo::alternates();
+    $canonical = \App\Support\Seo::canonical();
     $title = html_entity_decode(trim($__env->yieldContent('title')), ENT_QUOTES);
     $description = html_entity_decode(trim($__env->yieldContent('description')), ENT_QUOTES);
     $ogImage = html_entity_decode(trim($__env->yieldContent('og_image')), ENT_QUOTES) ?: asset('images/site/og-image.jpg');
@@ -33,10 +32,10 @@
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:url" content="{{ $canonical }}">
     <meta property="og:image" content="{{ $ogImage }}">
-    <meta property="og:locale" content="{{ Seo::regional($lang) }}">
+    <meta property="og:locale" content="{{ \App\Support\Seo::regional($lang) }}">
     @foreach(array_keys($alternates) as $locale)
     @if($locale !== $lang)
-    <meta property="og:locale:alternate" content="{{ Seo::regional($locale) }}">
+    <meta property="og:locale:alternate" content="{{ \App\Support\Seo::regional($locale) }}">
     @endif
     @endforeach
     <meta name="twitter:card" content="summary_large_image">
@@ -58,7 +57,7 @@
     <link rel="stylesheet" href="{{ $assetVersion('css/site.css') }}">
     @stack('head')
 
-    <script type="application/ld+json">{!! Seo::jsonLd(array_merge([Seo::website($lang)], $schema ?? [])) !!}</script>
+    <script type="application/ld+json">{!! \App\Support\Seo::jsonLd(array_merge([\App\Support\Seo::website($lang)], $schema ?? [])) !!}</script>
 
     @if($gaId)
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gaId }}"></script>

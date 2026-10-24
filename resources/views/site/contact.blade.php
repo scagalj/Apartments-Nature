@@ -1,27 +1,26 @@
 @extends('site.layout')
-@use('App\Support\Seo')
 
 @php
     $site = config('site');
     $home = route('welcome.locale', ['locale' => $lang]);
     $schema = [
-        Seo::lodgingBusiness($lang),
+        \App\Support\Seo::lodgingBusiness($lang),
         [
             '@type' => 'ContactPage',
             'url' => route('contactus', ['locale' => $lang]),
             'name' => __('site.contact_title'),
-            'about' => ['@id' => Seo::lodgingId()],
+            'about' => ['@id' => \App\Support\Seo::lodgingId()],
         ],
-        Seo::breadcrumbs([
+        \App\Support\Seo::breadcrumbs([
             [__('messages.Home'), $home],
             [__('messages.Contact'), route('contactus', ['locale' => $lang])],
         ]),
     ];
     $channels = [
-        ['whatsapp', 'WhatsApp', Seo::formatPhone($site['whatsapp']), 'https://wa.me/' . ltrim($site['whatsapp'], '+'), true],
-        ['phone', __('site.call_us'), Seo::formatPhone($site['phone']), 'tel:' . $site['phone'], false],
+        ['whatsapp', 'WhatsApp', \App\Support\Seo::formatPhone($site['whatsapp']), 'https://wa.me/' . ltrim($site['whatsapp'], '+'), true],
+        ['phone', __('site.call_us'), \App\Support\Seo::formatPhone($site['phone']), 'tel:' . $site['phone'], false],
         ['mail', 'E-mail', $site['email'], 'mailto:' . $site['email'], false],
-        ['map-pin', __('messages.Adress'), Seo::fullAddress(), $site['google_maps_url'], true],
+        ['map-pin', __('messages.Adress'), \App\Support\Seo::fullAddress(), $site['google_maps_url'], true],
     ];
 @endphp
 

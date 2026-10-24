@@ -60,7 +60,7 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
 
-        // Public contact / booking request forms: a few requests per visitor.
+        // Public contact / booking request forms: max 5 per hour and 10 per day per visitor.
         RateLimiter::for('contact-forms', function (Request $request) {
             $anchor = $request->routeIs('contact.booking.request') ? '#booking' : '#contact-form';
             $tooMany = fn() => redirect()->to(url()->previous() . $anchor)
@@ -68,7 +68,7 @@ class RouteServiceProvider extends ServiceProvider
                     ->withInput();
 
             return [
-                Limit::perMinutes(10, 3)->by('forms-10m|' . $request->ip())->response($tooMany),
+                Limit::perHour(5)->by('forms-hour|' . $request->ip())->response($tooMany),
                 Limit::perDay(10)->by('forms-day|' . $request->ip())->response($tooMany),
             ];
         });

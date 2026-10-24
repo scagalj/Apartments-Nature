@@ -1,5 +1,4 @@
 @extends('site.layout')
-@use('App\Support\Seo')
 
 @php
     $site = config('site');
@@ -21,7 +20,7 @@
     $house = $apartment->house;
 
     $metaDescription = $plainDescription
-        ? Seo::excerpt(__('site.meta_apartment_prefix', ['apartment' => $name, 'size' => $size, 'guests' => $guestsCount]) . ' ' . $plainDescription)
+        ? \App\Support\Seo::excerpt(__('site.meta_apartment_prefix', ['apartment' => $name, 'size' => $size, 'guests' => $guestsCount]) . ' ' . $plainDescription)
         : __('site.meta_apartment_description', ['apartment' => $name, 'size' => $size, 'guests' => $guestsCount]);
 
     // Booking card price, from the dates the visitor already selected.
@@ -72,10 +71,10 @@
                 'addressLocality' => $site['address']['city'],
                 'addressCountry' => $site['address']['country_code'],
             ],
-            'containedInPlace' => ['@id' => Seo::lodgingId()],
+            'containedInPlace' => ['@id' => \App\Support\Seo::lodgingId()],
         ]),
-        Seo::lodgingBusiness($lang),
-        Seo::breadcrumbs([
+        \App\Support\Seo::lodgingBusiness($lang),
+        \App\Support\Seo::breadcrumbs([
             [__('messages.Home'), $home],
             [__('messages.Apartments'), $home . '#apartments'],
             [$name, $pageUrl],
@@ -111,7 +110,7 @@
                 <a href="#reviews" class="meta-rating">@include('site.partials.icon', ['name' => 'star']) {{ number_format($reviewSummary['average'], 1) }}/10 · {{ trans_choice('site.reviews_count', $reviewSummary['count'], ['count' => $reviewSummary['count']]) }}</a>
                 <span aria-hidden="true">·</span>
                 @endif
-                <a href="#location">@include('site.partials.icon', ['name' => 'map-pin']) {{ Seo::fullAddress() }}</a>
+                <a href="#location">@include('site.partials.icon', ['name' => 'map-pin']) {{ \App\Support\Seo::fullAddress() }}</a>
             </p>
         </div>
     </header>
@@ -261,7 +260,7 @@
                 <div class="booking-contact">
                     <span>{{ __('site.prefer_to_talk') }}</span>
                     <a href="https://wa.me/{{ ltrim($site['whatsapp'], '+') }}" target="_blank" rel="noopener">@include('site.partials.icon', ['name' => 'whatsapp']) WhatsApp</a>
-                    <a href="tel:{{ $site['phone'] }}">@include('site.partials.icon', ['name' => 'phone']) {{ Seo::formatPhone($site['phone']) }}</a>
+                    <a href="tel:{{ $site['phone'] }}">@include('site.partials.icon', ['name' => 'phone']) {{ \App\Support\Seo::formatPhone($site['phone']) }}</a>
                 </div>
             </div>
         </aside>
