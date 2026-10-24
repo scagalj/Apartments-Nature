@@ -59,5 +59,18 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+
+        // Public contact / booking request forms: a few requests per visitor.
+        RateLimiter::for('contact-forms', function (Request $request) {
+            $anchor = $request->routeIs('contact.booking.request') ? '#booking' : '#contact-form';
+            $tooMany = fn() => redirect()->to(url()->previous() . $anchor)
+                    ->withErrors(['form' => __('site.form_too_many')])
+                    ->withInput();
+
+            return [
+                Limit::perMinutes(10, 3)->by('forms-10m|' . $request->ip())->response($tooMany),
+                Limit::perDay(10)->by('forms-day|' . $request->ip())->response($tooMany),
+            ];
+        });
     }
 }

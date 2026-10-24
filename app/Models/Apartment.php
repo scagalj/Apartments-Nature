@@ -14,6 +14,7 @@ use App\Models\ApartmentPrices;
 use App\Models\House;
 use App\Models\Images;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Lang;
 use Carbon\Carbon;
 
 /**
@@ -261,6 +262,55 @@ class Apartment extends Model {
         } else {
             return $isDatesDefined ? __('messages.TotalPrice') : __('messages.From');
         }
+    }
+
+    /**
+     * Translated public name, e.g. "Studio apartment 3".
+     */
+    public function displayName() {
+        $key = 'messages.' . $this->name;
+        return Lang::has($key) ? __($key) : $this->name;
+    }
+
+    /**
+     * Size in m², falling back to the default size from config/site.php.
+     */
+    public function sizeValue() {
+        $size = (int) preg_replace('/[^0-9]/', '', (string) $this->size);
+        return $size > 0 ? $size : config('site.default_apartment_size');
+    }
+
+    /**
+     * Lowest nightly price of the current and upcoming price periods.
+     */
+    public function getStartingPrice() {
+        $price = $this->apartmentPrices()->where('toDate', '>=', Carbon::today())->min('price');
+        return $price ? (float) $price : null;
+    }
+
+    public function plainDescription($lang) {
+        $description = $this->getdescriptionvalue($lang) ?: $this->getdescriptionvalue(LangController::getDefaultLanguage());
+        return trim(preg_replace('/\s+/u', ' ', strip_tags(str_replace(['<br>', '<br/>', '<br />', '</p>'], ' ', (string) $description))));
+    }
+
+    public function imageUrl($image) {
+        return $this->getImagesPath() . rawurlencode($image->filename);
+    }
+
+    /**
+     * Descriptive alt text: the image description from the admin, or the
+     * apartment name with the location.
+     */
+    public function imageAlt($image, $index = 0) {
+        if (!empty($image->description)) {
+            return $image->description;
+        }
+        $alt = __('site.image_alt', ['apartment' => $this->displayName()]);
+        return $index > 0 ? $alt . ' – ' . __('site.photo') . ' ' . ($index + 1) : $alt;
+    }
+
+    public function getAllImages() {
+        return $this->getAllImagesToDisplay()->filter()->values();
     }
 
 //    public function getOtherImages() {

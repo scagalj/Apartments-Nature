@@ -30,4 +30,14 @@ class Images extends Model {
     public function apartment() {
         return $this->belongsTo(Apartment::class);
     }
+
+    /**
+     * [width, height] of the file on disk, so the page can reserve space for
+     * the image before it loads (avoids layout shift, a Core Web Vital).
+     */
+    public function dimensions() {
+        $path = public_path('images/apartments/' . $this->apartment_id . '/' . $this->filename);
+        $size = is_file($path) ? @getimagesize($path) : false;
+        return $size ? [$size[0], $size[1]] : [1024, 683];
+    }
 }

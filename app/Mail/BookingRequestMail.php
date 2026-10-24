@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+use App\Support\SpamGuard;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -29,9 +31,9 @@ class BookingRequestMail extends Mailable {
 
     public function getSubject() {
         if ($this->details->get('request') == 'informationRequest') {
-            return 'New Information Request from ' . $this->details->get('firstName');
+            return 'New Information Request from ' . SpamGuard::singleLine($this->details->get('firstName'), 60);
         } else if ($this->details->get('request') == 'bookingRequest') {
-            return 'New Booking Request from ' . $this->details->get('firstName');
+            return 'New Booking Request from ' . SpamGuard::singleLine($this->details->get('firstName'), 60);
         } else {
             return 'New mail from Apartments Nature website';
         }

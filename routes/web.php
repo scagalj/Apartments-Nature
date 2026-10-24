@@ -12,6 +12,7 @@ use App\Http\Controllers\HouseController;
 use App\Http\Controllers\BookingRequestController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SiteController;
 
 /*
   |--------------------------------------------------------------------------
@@ -33,7 +34,6 @@ Route::post('/', [ApartmentController::class, 'updateSearchCriteria'])->name('ap
 
 //----AJAX REQUEST-----------
 Route::get('/apartment/price', [ApartmentController::class, 'calculatePriceAjax'])->name('apartment.price');
-Route::get('/apartment/overview', [ApartmentController::class, 'renderApartmentOverviewAjax'])->name('apartment.overview');
 
 
 
@@ -67,63 +67,30 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //--APPLICATION PORTAL
 
-Route::group([], function () {
+$locales = implode('|', config('app.locales'));
 
-    Route::get('/', function () {
-        $lang = LangController::getLanguage();
-        if($lang != 'en'){
-            return redirect()->route('welcome.locale', ['locale' => $lang]);
-        }
-        $apartment1 = ApartmentController::getById(1);
-        $apartment2 = ApartmentController::getById(2);
-        $apartment3 = ApartmentController::getById(3);
-        $apartment4 = ApartmentController::getById(4);
-        return view('welcome', compact('lang', 'apartment1', 'apartment2', 'apartment3', 'apartment4'));
-    })->name('welcome');
-    
-    Route::get('/{locale}', function ($locale) {
-        $lang = LangController::updateLanguage($locale); // Set the application locale based on the URL segment
-        $apartment1 = ApartmentController::getById(1);
-        $apartment2 = ApartmentController::getById(2);
-        $apartment3 = ApartmentController::getById(3);
-        $apartment4 = ApartmentController::getById(4);
-        return view('welcome', compact('lang', 'apartment1', 'apartment2', 'apartment3', 'apartment4'));
-    })->name('welcome.locale');
-    
-    
-//    Route::get('/apartment/{apartment}', [ApartmentController::class, 'show'])->name('apartment');
-    Route::get('/apartment/{apartment}', function ($apartment) {
-        return redirect()->route('apartment.locale', ['locale' => LangController::getLanguage(), 'apartment' => $apartment]);
-    })->name('apartment');
-    
-    Route::get('{locale}/apartment/{apartment}', [ApartmentController::class, 'show'])->name('apartment.locale');
+Route::get('/', [SiteController::class, 'root'])->name('welcome');
 
-//---CONTACT FORM---
-    Route::get('/{locale}/contactus', function ($locale) {
-        $lang = LangController::updateLanguage($locale); // Set the application locale based on the URL segment
-        return view('contactus', compact('lang'));
-    })->name('contactus');
+Route::get('/apartment/{apartment}', function ($apartment) {
+    return redirect()->route('apartment.locale', ['locale' => LangController::getLanguage(), 'apartment' => $apartment], 301);
+})->whereNumber('apartment')->name('apartment');
 
+Route::get('/selfcheckin', function () {
+    return redirect()->route('selfcheckin.locale', ['locale' => LangController::getLanguage()], 301);
+})->name('selfcheckin');
 
-    Route::get('/{locale}/privacypolicy', function ($locale) {
-        $lang = LangController::updateLanguage($locale); // Set the application locale based on the URL segment
-        return view('privacypolicy', compact('lang'));
-    })->name('privacypolicy');
-
-    Route::get('/selfcheckin', function () {
-        return redirect()->route('selfcheckin.locale', ['locale' => LangController::getLanguage()]);
-    })->name('selfcheckin');
-
-    Route::get('/{locale}/selfcheckin', function ($locale) {
-        $lang = LangController::updateLanguage($locale); // Set the application locale based on the URL segment
-        return view('selfcheckin', compact('lang'));
-    })->name('selfcheckin.locale');
+Route::where(['locale' => $locales])->group(function () {
+    Route::get('/{locale}', [SiteController::class, 'home'])->name('welcome.locale');
+    Route::get('/{locale}/apartment/{apartment}', [ApartmentController::class, 'show'])->whereNumber('apartment')->name('apartment.locale');
+    Route::get('/{locale}/contactus', [SiteController::class, 'contact'])->name('contactus');
+    Route::get('/{locale}/privacypolicy', [SiteController::class, 'privacyPolicy'])->name('privacypolicy');
+    Route::get('/{locale}/selfcheckin', [SiteController::class, 'selfCheckIn'])->name('selfcheckin.locale');
 });
 
 
 //---MAIL CONTACT----
-Route::post('/contactus', [BookingRequestController::class, 'sendInformationRequest'])->name('contact.information.request');
-Route::post('/apartment/{apartment_id}', [BookingRequestController::class, 'sendBookingRequest'])->name('contact.booking.request');
+Route::post('/contactus', [BookingRequestController::class, 'sendInformationRequest'])->middleware('throttle:contact-forms')->name('contact.information.request');
+Route::post('/apartment/{apartment_id}', [BookingRequestController::class, 'sendBookingRequest'])->whereNumber('apartment_id')->middleware('throttle:contact-forms')->name('contact.booking.request');
 
 //---ADMIN PORTAL--
 

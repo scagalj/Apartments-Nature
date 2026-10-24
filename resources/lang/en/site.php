@@ -1,0 +1,161 @@
+<?php
+
+return [
+    // Meta (titles ~60 characters, descriptions ~155 characters)
+    'meta_home_title' => 'Apartments in Omiš near the Beach & Old Town | Apartments Nature',
+    'meta_home_description' => 'Studio apartments in Omiš, Croatia with balcony, A/C, Wi-Fi and free parking – a short walk to the beach, old town and Cetina river. Book direct, no fees.',
+    'meta_apartment_title' => ':apartment in Omiš for :guests guests | Apartments Nature',
+    'meta_apartment_prefix' => ':apartment in Omiš, Croatia – :size m², up to :guests guests.',
+    'meta_apartment_description' => ':apartment in Omiš, Croatia: a :size m² studio for up to :guests guests with balcony, A/C, Wi-Fi, kitchenette and free parking, a short walk to the beach.',
+    'meta_contact_title' => 'Contact & Booking | Apartments Nature Omiš',
+    'meta_contact_description' => 'Contact Apartments Nature in Omiš, Croatia by WhatsApp, phone or e-mail. Ask about availability and prices and book your studio apartment directly.',
+    'meta_privacy_description' => 'Privacy policy of Apartments Nature, Omiš.',
+
+    // Navigation & general
+    'skip_to_content' => 'Skip to content',
+    'menu' => 'Menu',
+    'language' => 'Language',
+    'croatia' => 'Croatia',
+    'nav_things_to_do' => 'Things to do',
+    'nav_faq' => 'FAQ',
+    'book_direct' => 'Book direct',
+    'arrival_guide' => 'Arrival guide',
+    'call_us' => 'Call us',
+    'send_message' => 'Send a message',
+    'email_address' => 'E-mail address',
+    'close' => 'Close',
+    'previous' => 'Previous',
+    'next' => 'Next',
+    'photo' => 'photo',
+    'image_alt' => ':apartment – Apartments Nature, Omiš',
+    'size_m2' => ':size m²',
+    'up_to_guests' => 'Up to :count guests',
+    'view_apartment' => 'View apartment',
+    'balcony' => 'Balcony',
+    'air_conditioning' => 'Air conditioning',
+    'free_wifi' => 'Free Wi-Fi',
+    'kitchenette' => 'Kitchenette',
+    'studio' => 'studio',
+    'bed_count' => '{1} :count bed|[2,*] :count beds',
+    'private_bathroom' => 'private bathroom',
+    'in_omis' => 'Omiš',
+
+    // Hero
+    'hero_eyebrow' => 'Omiš · Central Dalmatia · Croatia',
+    'hero_title' => 'Apartments in Omiš, between the sea and the Cetina canyon',
+    'hero_lead' => ':count bright studio apartments with private balconies in a quiet house beneath the Omiš cliffs. The beach and the old town are about a 10-minute walk away, and parking at the house is free.',
+    'check_prices' => 'Check prices',
+    'hero_note' => 'Book directly with the hosts – cleaning and tourist tax included.',
+    'hero_img_terrace' => 'Balcony table with a view of the greenery at Apartments Nature in Omiš',
+    'hero_img_house' => 'The Apartments Nature house at Lisičina 2, beneath the cliffs of Omiš',
+    'hero_img_balcony' => 'Sunny private balcony of a studio apartment in Omiš',
+
+    // Highlights
+    'highlights_label' => 'Why guests choose us',
+    'highlight_parking_title' => 'Free private parking',
+    'highlight_parking_text' => 'Your own parking space right at the house, included in the price.',
+    'highlight_checkin_title' => 'Self check-in',
+    'highlight_checkin_text' => 'Arrive any time between :from and :until – your key is waiting in the door.',
+    'highlight_comfort_title' => 'A/C, Wi-Fi & kitchenette',
+    'highlight_comfort_text' => 'Every studio has its own bathroom, kitchenette and private balcony.',
+    'highlight_direct_title' => 'Book direct, no fees',
+    'highlight_direct_text' => 'Final cleaning and tourist tax are included. Requests are free and non-binding.',
+
+    // Apartments
+    'apartments_eyebrow' => 'Our apartments',
+    'apartments_title' => 'Studio apartments in Omiš',
+    'apartments_lead' => 'Every studio has a private bathroom, a kitchenette, air conditioning and its own balcony. Choose your dates above to see the total price for your stay.',
+
+    // About the house
+    'about_eyebrow' => 'The house',
+    'about_title' => 'A quiet home base in the heart of Omiš',
+    'about_p1' => 'Apartments Nature is a house with :count studio apartments on Lisičina street in Priko, the quiet part of Omiš across the Cetina river from the old town. Behind the house rise the rocky cliffs at the mouth of the Cetina canyon; in front of it, the river, the beach and the town are only a few minutes away.',
+    'about_p2' => 'The studios are simple, clean and practical – made for couples, friends and solo travellers who spend their days at the sea or on the river and want a comfortable, fairly priced place to come back to.',
+    'about_li1' => 'Private balcony, bathroom and kitchenette in every studio',
+    'about_li2' => 'Free private parking at the house',
+    'about_li3' => 'Self check-in with a step-by-step arrival guide',
+    'about_li4' => 'Beach, old town, shops and restaurants within walking distance',
+    'about_li5' => 'Book directly with the hosts – no booking-platform fees',
+    'about_caption' => 'Our house at Lisičina 2 – the real building you will stay in.',
+
+    // Reviews
+    'reviews_title' => 'What our guests say',
+    'reviews_lead' => 'Real reviews from guests who stayed with us.',
+    'reviews_count' => '{1} :count review|[2,*] :count reviews',
+    'out_of_10' => 'out of 10',
+    'rated' => 'Rated :score out of 10',
+    'score_word_exceptional' => 'Exceptional',
+    'score_word_very_good' => 'Very good',
+    'score_word_good' => 'Good',
+    'score_word_pleasant' => 'Pleasant',
+
+    // Location
+    'location_title' => 'Where you will stay in Omiš',
+    'location_p1' => 'Apartments Nature is at Lisičina 2 in Priko, on the quiet side of Omiš across the Cetina river from the old town. The town centre, the sandy main beach and the entrance to the Cetina canyon are all within an easy walk.',
+    'location_p2' => 'Omiš lies on the Adriatic coast between Split and Makarska, so it is an ideal base for day trips along the Dalmatian coast and to the islands.',
+    'distance_cetina' => 'Cetina river',
+    'distance_old_town' => 'Omiš old town',
+    'distance_beach' => 'Velika plaža beach',
+    'distance_split' => 'Split',
+    'distance_airport' => 'Split Airport',
+    'distance_makarska' => 'Makarska',
+    'get_directions' => 'Get directions',
+    'map_title' => 'Map: Apartments Nature, Lisičina 2, Omiš',
+
+    // Things to do
+    'explore_title' => 'Things to do in Omiš',
+
+    // FAQ
+    'faq_title' => 'Frequently asked questions',
+    'faq_q1' => 'How far are the apartments from the beach?',
+    'faq_a1' => 'The main sandy beach of Omiš, Velika plaža, is about :beach from the house – roughly a 10-minute walk. The old town is about :old_town away.',
+    'faq_q2' => 'Is there parking at the apartments?',
+    'faq_a2' => 'Yes. Free private parking is available at the house and is included in the price.',
+    'faq_q3' => 'What are the check-in and check-out times?',
+    'faq_a3' => 'Check-in is between :from and :until and check-out is until :out. Check-in is self check-in: follow our arrival guide and you will find the key on the inside of your apartment door.',
+    'faq_q4' => 'How far is Omiš from Split Airport?',
+    'faq_a4' => 'Split Airport is about :airport from the apartments (around one hour by car) and the city of Split about :split. Omiš is also well connected by bus with Split and Makarska.',
+    'faq_q5' => 'Are cleaning and tourist tax included in the price?',
+    'faq_a5' => 'Yes. The final cleaning and the tourist tax are included in the price – there are no hidden fees when you book directly with us.',
+    'faq_q6' => 'How do I book an apartment?',
+    'faq_a6' => 'Choose an apartment and your dates and send a booking request, or contact us by e-mail, phone or WhatsApp. We personally confirm availability and the final price. Sending a request is free and non-binding.',
+    'faq_q7' => 'Do the apartments have air conditioning and Wi-Fi?',
+    'faq_a7' => 'Yes. All :count studios have air conditioning and free Wi-Fi, as well as a private bathroom, a kitchenette and a balcony.',
+    'faq_q8' => 'What is there to do in Omiš?',
+    'faq_a8' => 'Omiš is known for rafting and canyoning on the Cetina river, the zipline above the canyon, the via ferrata and hike to the Fortica fortress, sandy beaches and the Festival of Dalmatian Klapa every July.',
+
+    // CTA & footer
+    'cta_title' => 'Planning a stay in Omiš?',
+    'cta_text' => 'Ask us about availability, prices or your arrival – you talk directly with the hosts.',
+    'footer_tagline' => 'Studio apartments with balconies and free parking in Omiš, Croatia – a short walk to the beach and the old town.',
+    'footer_explore' => 'Explore',
+    'find_us_on' => 'Find us on',
+
+    // Apartment page
+    'about_apartment' => 'About this apartment',
+    'open_photo' => 'Open photo :number',
+    'show_all_amenities' => 'Show all :count amenities',
+    'show_less' => 'Show less',
+    'booking_title' => 'Request a booking',
+    'booking_note' => 'Free and non-binding. We confirm availability and the final price personally – no payment is taken online.',
+    'prefer_to_talk' => 'Prefer to talk to us directly?',
+    'request_booking' => 'Request booking',
+    'other_apartments' => 'Other apartments in the same house',
+
+    // Contact page
+    'contact_title' => 'Contact Apartments Nature',
+    'contact_lead' => 'Questions about availability, prices or your arrival? Write to us or call – you talk directly with the hosts.',
+
+    // Form validation & spam protection
+    'form_error_title' => 'Please check the form:',
+    'form_required' => 'Please fill in all required fields.',
+    'form_email' => 'Please enter a valid e-mail address.',
+    'form_too_long' => 'One of the fields is too long.',
+    'form_dates' => 'Please choose a valid check-in and check-out date (check-out after check-in).',
+    'form_date_past' => 'Check-in cannot be in the past.',
+    'form_guests' => 'Please check the number of guests.',
+    'form_no_links' => 'Please do not include links in your name.',
+    'form_too_many' => 'Too many requests from your connection. Please try again later or contact us by phone or WhatsApp.',
+    'form_expired' => 'The form has expired. Please send it again.',
+    'form_captcha' => 'The security check failed. Please try again.',
+];

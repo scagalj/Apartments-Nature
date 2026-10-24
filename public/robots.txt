@@ -1,8 +1,11 @@
 User-agent: *
-Disallow: /images/
-Disallow: /lang/
-Disallow: /price
-Disallow: /overview
+Disallow: /apnatureadmin
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+Disallow: /home
+Disallow: /image-upload
+Disallow: /apartment/price
 Disallow: /wordpress
-Disallow: /wordpress/
+
 Sitemap: https://www.apartments-nature.com/sitemap.xml

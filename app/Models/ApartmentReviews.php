@@ -39,4 +39,28 @@ class ApartmentReviews extends Model {
         return $this->belongsTo(Apartment::class);
     }
 
+    /**
+     * Average score (out of 10) and number of rated reviews.
+     */
+    public static function summary() {
+        static $summary = null;
+        if ($summary === null) {
+            $rated = self::whereNotNull('ratingNumber')->where('ratingNumber', '>', 0);
+            $count = (clone $rated)->count();
+            $summary = [
+                'count' => $count,
+                'average' => $count > 0 ? round((float) $rated->avg('ratingNumber'), 1) : null,
+            ];
+        }
+        return $summary;
+    }
+
+    public static function latestRated($limit) {
+        return self::whereNotNull('ratingNumber')->orderByDesc('reviewDate')->limit($limit)->get();
+    }
+
+    public static function newestFirst() {
+        return self::orderByDesc('reviewDate')->get();
+    }
+
 }
