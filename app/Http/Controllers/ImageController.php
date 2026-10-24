@@ -20,7 +20,7 @@ class ImageController extends Controller {
         $isMain = $request->has('mainimage');
 
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image:allow_svg|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $apartment = Apartment::find($apartment_id);

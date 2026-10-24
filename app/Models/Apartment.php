@@ -213,7 +213,7 @@ class Apartment extends Model {
             $dateFrom = Carbon::createFromFormat('d.m.Y', $periodFrom);
             $dateTo = Carbon::createFromFormat('d.m.Y', $periodTo);
 
-            $days = $dateFrom->diffInDays($dateTo);
+            $days = (int) $dateFrom->diffInDays($dateTo, true);
 
 //            error_log('DATE; 3 ' . $days);
             if ($days < 1 || $days > 365) {

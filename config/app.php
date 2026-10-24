@@ -235,7 +235,6 @@ return [
 
     ],
 
-    Doctrine\DBAL\Driver\ServiceProvider::class,
 
     
 ];
