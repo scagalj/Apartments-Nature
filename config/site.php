@@ -38,7 +38,7 @@ return [
     'booking_email' => env('BOOKING_REQUEST_EMAIL') ?: 'cagalj95@gmail.com',
 
     // E.164 format, no spaces.
-    'phone' => '+385919285696',
+    'phone' => '+385915933575',
     'whatsapp' => '+385915933575',
 
     'google_maps_url' => 'https://www.google.com/maps/search/?api=1&query=Apartments+Nature+Lisi%C4%8Dina+2+Omi%C5%A1',

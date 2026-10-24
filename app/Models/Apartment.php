@@ -273,10 +273,13 @@ class Apartment extends Model {
     }
 
     /**
-     * Size in m², falling back to the default size from config/site.php.
+     * Size in whole m² (e.g. "24.2", "24,2" or "24.2 m2" -> 24), falling back
+     * to the default size from config/site.php.
      */
     public function sizeValue() {
-        $size = (int) preg_replace('/[^0-9]/', '', (string) $this->size);
+        $size = preg_match('/\d+(?:[.,]\d+)?/', (string) $this->size, $match)
+                ? (int) round((float) str_replace(',', '.', $match[0]))
+                : 0;
         return $size > 0 ? $size : config('site.default_apartment_size');
     }
 
